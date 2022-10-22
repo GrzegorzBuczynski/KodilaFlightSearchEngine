@@ -16,6 +16,7 @@ class Main {
 class Flight {
   private String departure;
   private String arrival;
+  private String price;
 
   public Flight(String departure, String arrival) {
     this.departure = departure;
