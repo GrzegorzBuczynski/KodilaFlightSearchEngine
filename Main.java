@@ -9,6 +9,8 @@ class Main {
     System.out.println("After discount phone price is " + phone1.getPrice());
     phone1.increasePriceAmount(10);
     System.out.println("Due to inflation, the price rose to " + phone1.getPrice());
+    phone1.checkPrice();
+    phone1.displayEvenNumbers(5, 20);
 
   }
 }
@@ -38,6 +40,18 @@ class MobilePhone {
     this.weight = weight;
     this.price = price;
   };
+
+  public void checkPrice() {
+    if (price < 200) {
+      System.out.println("Price is very good");
+    } else if (price < 300) {
+      System.out.println("Price is good");
+    } else if (price < 500) {
+      System.out.println("Price could be lower");
+    } else {
+      System.out.println("this phone is too expensive");
+    }
+  }
 
   public String getWeight() {
     return weight;
@@ -69,6 +83,14 @@ class MobilePhone {
     int price = this.price;
     price = price - value;
     this.price = price;
+  }
+
+  public void displayEvenNumbers(int min, int max) {
+    for (int i = min; i < max; i++) {
+      if (i % 2 == 0) {
+        System.out.println(i);
+      }
+    }
   }
 
 }
