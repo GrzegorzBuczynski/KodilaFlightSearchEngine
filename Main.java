@@ -2,39 +2,83 @@ import java.util.ArrayList;
 
 class Main {
   public static void main(String[] args) {
-    ComputerItems computer = new ComputerItems();
-    computer.displayList();
+    FlightDatabase flight1 = new FlightDatabase();
+    flight1.checkIfFlightExists("Berlin", "Tokyo");
+    // flight1.displayList();
   }
 }
 
-class ComputerItems {
-  ArrayList<String> list = new ArrayList<String>();
+class FlightDatabase {
+  ArrayList<Flight> flights = new ArrayList<Flight>();
 
-  public ComputerItems() {
-    this.list.add("test");
-    this.list.add("computer");
-    this.list.add("mouse");
-    this.list.add("keyboard");
+  public FlightDatabase() {
+    this.flights.add(new Flight("Berlin", "Tokyo"));
+    this.flights.add(new Flight("Paris", "Berlin"));
+    this.flights.add(new Flight("Warsaw", "Paris"));
+    this.flights.add(new Flight("Madrid", "Berlin"));
+    this.flights.add(new Flight("Berlin", "Warsaw"));
+    this.flights.add(new Flight("Paris", "Madrid"));
+    this.flights.add(new Flight("Porto", "Warsaw"));
+    this.flights.add(new Flight("Madrid", "Porto"));
+    this.flights.add(new Flight("Warsaw", "Madrid"));
   }
 
+  public void checkIfFlightExists(String departure, String arrival) {
+    boolean flag = false;
+    for (int i = 0; i < flights.size(); i++) {
+      if (departure.equals(flights.get(i).getDeparture()) &&
+          arrival.equals(flights.get(i).getArrival())) {  flag = true;      
+      } 
+     }
+     if (flag){
+        System.out.println("Flight exsist");
+         }
+     else {
+        System.out.println("Flight don't exist");
+     }
+  }
   public void displayList() {
-    for (int i = 0; i < list.size(); i++) {
-      String element = list.get(i);
-      if (element.length() > 5) {
-        System.out.println(element);
-      }
+  for (int i = 0; i < flights.size(); i++) {
+  Flight element = flights.get(i);
+  System.out.println("Flight form " + element.getDeparture() + " to " + 
+                     element.getArrival());
+     }
     }
   }
-}
 
 class Flight {
   private String departure;
   private String arrival;
   private String price;
 
+  // getters and setters
+  public String getDeparture() {
+    return departure;
+  }
+
+  public void setDeparture(String departure) {
+    this.departure = departure;
+  }
+
+  public String getArrival() {
+    return arrival;
+  }
+
+  public void setArrival(String arrival) {
+    this.arrival = arrival;
+  }
+
   public Flight(String departure, String arrival) {
     this.departure = departure;
     this.arrival = arrival;
+  }
+
+  public String getPrice() {
+    return price;
+  }
+
+  public void setPrice(String price) {
+    this.price = price;
   }
 
   public String getflightInformation() {
