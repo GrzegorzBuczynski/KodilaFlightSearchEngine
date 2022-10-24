@@ -2,8 +2,10 @@ import java.util.ArrayList;
 
 class Main {
   public static void main(String[] args) {
-    FlightDatabase flight1 = new FlightDatabase();
-    flight1.checkIfFlightExists("Berlin", "Tokyo");
+    FlightDatabase database = new FlightDatabase();
+    database.checkIfFlightExists("Berlin", "Tokyo");
+    database.getFlightsFromCity("Berlin");
+    database.getFlightsToCity("Berlin");
     // flight1.displayList();
   }
 }
@@ -24,17 +26,43 @@ class FlightDatabase {
   }
 
   public void checkIfFlightExists(String departure, String arrival) {
-    boolean flag = true;
+
     for (int i = 0; i < flights.size(); i++) {
       if (departure.equals(flights.get(i).getDeparture()) &&
           arrival.equals(flights.get(i).getArrival())) {
-        System.out.println("Flight exsist");
-        flag = false;
+        System.out.println("Flight exists");
+        return;
       }
     }
-    if (flag) {
-      System.out.println("Flight don't exist");
-    } 
+    System.out.println("Flight don't exists");
+  }
+
+  public void getFlightsFromCity(String city) {
+    boolean isNotFound = true;
+    for (int i = 0; i < this.flights.size(); i++) {
+      Flight flight = this.flights.get(i);
+      if (city.equals(flight.getDeparture())) {
+        System.out.println(flight.getFlightInformation());
+        isNotFound = false;
+      }
+    }
+    if (isNotFound) {
+      System.out.println("Flight not found");
+    }
+  }
+
+  public void getFlightsToCity(String city) {
+    boolean isNotFound = true;
+    for (int i = 0; i < this.flights.size(); i++) {
+      Flight flight = this.flights.get(i);
+      if (city.equals(flight.getArrival())) {
+        System.out.println(flight.getFlightInformation());
+        isNotFound = false;
+      }
+    }
+    if (isNotFound) {
+      System.out.println("Flight not found");
+    }
   }
 
   public void displayList() {
@@ -81,7 +109,7 @@ class Flight {
     this.price = price;
   }
 
-  public String getflightInformation() {
+  public String getFlightInformation() {
     String information;
     information = "This flight is from " + departure + " to " + arrival + ".";
     return information;
