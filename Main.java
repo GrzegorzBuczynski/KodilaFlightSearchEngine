@@ -1,17 +1,29 @@
+import java.util.ArrayList;
+
 class Main {
   public static void main(String[] args) {
-    Flight flight1 = new Flight("Warsaw", "Tokyo");
-    System.out.println(flight1.getflightInformation());
+    ComputerItems computer = new ComputerItems();
+    computer.displayList();
+  }
+}
 
-    MobilePhone phone1 = new MobilePhone("500g", 500);
-    System.out.println("Phone price is " + phone1.getPrice());
-    phone1.decreasePricePercentage(10);
-    System.out.println("After discount phone price is " + phone1.getPrice());
-    phone1.increasePriceAmount(10);
-    System.out.println("Due to inflation, the price rose to " + phone1.getPrice());
-    phone1.checkPrice();
-    phone1.displayEvenNumbers(5, 20);
+class ComputerItems {
+  ArrayList<String> list = new ArrayList<String>();
 
+  public ComputerItems() {
+    this.list.add("test");
+    this.list.add("computer");
+    this.list.add("mouse");
+    this.list.add("keyboard");
+  }
+
+  public void displayList() {
+    for (int i = 0; i < list.size(); i++) {
+      String element = list.get(i);
+      if (element.length() > 5) {
+        System.out.println(element);
+      }
+    }
   }
 }
 
