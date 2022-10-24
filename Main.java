@@ -24,27 +24,27 @@ class FlightDatabase {
   }
 
   public void checkIfFlightExists(String departure, String arrival) {
-    boolean flag = false;
+    boolean flag = true;
     for (int i = 0; i < flights.size(); i++) {
       if (departure.equals(flights.get(i).getDeparture()) &&
-          arrival.equals(flights.get(i).getArrival())) {  flag = true;      
-      } 
-     }
-     if (flag){
+          arrival.equals(flights.get(i).getArrival())) {
         System.out.println("Flight exsist");
-         }
-     else {
-        System.out.println("Flight don't exist");
-     }
+        flag = false;
+      }
+    }
+    if (flag) {
+      System.out.println("Flight don't exist");
+    } 
   }
+
   public void displayList() {
-  for (int i = 0; i < flights.size(); i++) {
-  Flight element = flights.get(i);
-  System.out.println("Flight form " + element.getDeparture() + " to " + 
-                     element.getArrival());
-     }
+    for (int i = 0; i < flights.size(); i++) {
+      Flight element = flights.get(i);
+      System.out.println("Flight form " + element.getDeparture() + " to " +
+          element.getArrival());
     }
   }
+}
 
 class Flight {
   private String departure;
