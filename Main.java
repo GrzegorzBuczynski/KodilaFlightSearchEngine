@@ -9,10 +9,13 @@ class Main {
     // ArrayList<Flight> toCity = database.getFlightsToCity("Berlin");
     // database.displayFlights(fromCity);
     // database.displayFlights(toCity);
-    database.displayFlightsFromCity("Warsaw");
-    database.displayFlightsToCity("Tokyo");
-    System.out.println(database.getCities());
-    System.out.println("Cheapest flight : " + database.getCheapestsFlightFromCity("Warsaw").getFlightInformation());
+    // database.displayFlightsFromCity("Warsaw");
+    // database.displayFlightsToCity("Tokyo");
+    // System.out.println(database.getCities());
+    // System.out.println("Cheapest flight : " +
+    // database.getCheapestsFlightFromCity("Warsaw").getFlightInformation());
+    ArrayList<Journey> journeys = database.getFlights("Paris", "Porto");
+    System.out.println(journeys);
   }
 }
 
@@ -126,6 +129,20 @@ class FlightDatabase {
     }
     return cheapestFlight;
   }
+
+  public ArrayList<Journey> getFlights(String start, String end) {
+    ArrayList<Flight> starting = getFlightsFromCity(start);
+    ArrayList<Flight> ending = getFlightsToCity(end);
+    ArrayList<Journey> results = new ArrayList<Journey>();
+    for (Flight first : starting) {
+      for (Flight second : ending) {
+        if (first.getArrival().equals(second.getDeparture())) {
+          results.add(new Journey(first, second));
+        }
+      }
+    }
+    return results;
+  }
 }
 
 class Flight {
@@ -234,4 +251,19 @@ class MobilePhone {
     }
   }
 
+}
+
+class Journey {
+  Flight first;
+  Flight second;
+
+  public Journey(Flight first, Flight second) {
+    this.first = first;
+    this.second = second;
+  }
+
+  public String toString() {
+    return "Flight from: " + first.getDeparture() + " to " + second.getArrival() + " with stop at " + first.getArrival()
+        + " cost " + (first.getPrice() + second.getPrice());
+  }
 }
