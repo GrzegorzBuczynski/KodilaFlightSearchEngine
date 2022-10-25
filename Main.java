@@ -4,9 +4,13 @@ class Main {
   public static void main(String[] args) {
     FlightDatabase database = new FlightDatabase();
     database.checkIfFlightExists("Berlin", "Tokyo");
-    database.getFlightsFromCity("Berlin");
-    database.getFlightsToCity("Berlin");
-    // flight1.displayList();
+
+    // ArrayList<Flight> fromCity = database.getFlightsFromCity("Berlin");
+    // ArrayList<Flight> toCity = database.getFlightsToCity("Berlin");
+    // database.displayFlights(fromCity);
+    // database.displayFlights(toCity);
+    database.displayFlightsFromCity("Warsaw");
+    database.displayFlightsToCity("Tokyo");
   }
 }
 
@@ -37,31 +41,45 @@ class FlightDatabase {
     System.out.println("Flight don't exists");
   }
 
-  public void getFlightsFromCity(String city) {
-    boolean isNotFound = true;
+  public ArrayList<Flight> getFlightsFromCity(String city) {
+    ArrayList<Flight> results = new ArrayList<Flight>();
     for (int i = 0; i < this.flights.size(); i++) {
       Flight flight = this.flights.get(i);
       if (city.equals(flight.getDeparture())) {
-        System.out.println(flight.getFlightInformation());
-        isNotFound = false;
+        results.add(flight);
       }
     }
-    if (isNotFound) {
-      System.out.println("Flight not found");
-    }
+    return results;
   }
 
-  public void getFlightsToCity(String city) {
-    boolean isNotFound = true;
+  public void displayFlightsFromCity(String city) {
+    ArrayList<Flight> results = getFlightsFromCity(city);
+    displayFlights(results);
+  }
+
+  public void displayFlightsToCity(String city) {
+    ArrayList<Flight> results = getFlightsToCity(city);
+    displayFlights(results);
+  }
+
+  public ArrayList<Flight> getFlightsToCity(String city) {
+    ArrayList<Flight> results = new ArrayList<Flight>();
     for (int i = 0; i < this.flights.size(); i++) {
       Flight flight = this.flights.get(i);
       if (city.equals(flight.getArrival())) {
-        System.out.println(flight.getFlightInformation());
-        isNotFound = false;
+        results.add(flight);
       }
     }
-    if (isNotFound) {
-      System.out.println("Flight not found");
+    return results;
+  }
+
+  public void displayFlights(ArrayList<Flight> results) {
+    if (results.isEmpty()) {
+      System.out.println("Flight not found.");
+    }
+    for (int i = 0; i < results.size(); i++) {
+      Flight flight = results.get(i);
+      System.out.println(flight.getFlightInformation());
     }
   }
 
