@@ -12,6 +12,7 @@ class Main {
     database.displayFlightsFromCity("Warsaw");
     database.displayFlightsToCity("Tokyo");
     System.out.println(database.getCities());
+    System.out.println("Cheapest flight : " + database.getCheapestsFlightFromCity("Warsaw").getFlightInformation());
   }
 }
 
@@ -19,15 +20,15 @@ class FlightDatabase {
   ArrayList<Flight> flights = new ArrayList<Flight>();
 
   public FlightDatabase() {
-    this.flights.add(new Flight("Berlin", "Tokyo"));
-    this.flights.add(new Flight("Paris", "Berlin"));
-    this.flights.add(new Flight("Warsaw", "Paris"));
-    this.flights.add(new Flight("Madrid", "Berlin"));
-    this.flights.add(new Flight("Berlin", "Warsaw"));
-    this.flights.add(new Flight("Paris", "Madrid"));
-    this.flights.add(new Flight("Porto", "Warsaw"));
-    this.flights.add(new Flight("Madrid", "Porto"));
-    this.flights.add(new Flight("Warsaw", "Madrid"));
+    this.flights.add(new Flight("Berlin", "Tokyo", 200));
+    this.flights.add(new Flight("Paris", "Berlin", 340));
+    this.flights.add(new Flight("Warsaw", "Paris", 300));
+    this.flights.add(new Flight("Madrid", "Berlin", 100));
+    this.flights.add(new Flight("Berlin", "Warsaw", 2400));
+    this.flights.add(new Flight("Paris", "Madrid", 120));
+    this.flights.add(new Flight("Porto", "Warsaw", 800));
+    this.flights.add(new Flight("Madrid", "Porto", 550));
+    this.flights.add(new Flight("Warsaw", "Madrid", 300));
   }
 
   public void checkIfFlightExists(String departure, String arrival) {
@@ -94,8 +95,7 @@ class FlightDatabase {
 
   public ArrayList<String> getCities() {
     ArrayList<String> cities = new ArrayList<String>();
-    for (int i = 0; i < this.flights.size(); i++) {
-      Flight flight = this.flights.get(i);
+    for (Flight flight : this.flights) {
       if (!cities.contains(flight.getDeparture())) {
         cities.add(flight.getDeparture());
       }
@@ -105,12 +105,46 @@ class FlightDatabase {
     }
     return cities;
   }
+
+  public Flight getCheapestsFlight() {
+    Flight cheapestFlight = null;
+    for (Flight flight : this.flights) {
+      if (cheapestFlight == null || flight.getPrice() < cheapestFlight.getPrice()) {
+        cheapestFlight = flight;
+      }
+    }
+    return cheapestFlight;
+  }
+
+  public Flight getCheapestsFlightFromCity(String city) {
+    ArrayList<Flight> fromCity = getFlightsFromCity(city);
+    Flight cheapestFlight = null;
+    for (Flight flight : fromCity) {
+      if ((cheapestFlight == null || flight.getPrice() < cheapestFlight.getPrice())) {
+        cheapestFlight = flight;
+      }
+    }
+    return cheapestFlight;
+  }
 }
 
 class Flight {
   private String departure;
   private String arrival;
-  private String price;
+  private int price;
+
+  public Flight(String departure, String arrival, int price) {
+    this.departure = departure;
+    this.arrival = arrival;
+    this.price = price;
+  }
+
+  public String getFlightInformation() {
+    String information;
+    information = "Flight from " + departure + " to "
+        + arrival + " cost " + price + ".";
+    return information;
+  }
 
   // getters and setters
   public String getDeparture() {
@@ -129,24 +163,14 @@ class Flight {
     this.arrival = arrival;
   }
 
-  public Flight(String departure, String arrival) {
-    this.departure = departure;
-    this.arrival = arrival;
-  }
-
-  public String getPrice() {
+  public int getPrice() {
     return price;
   }
 
-  public void setPrice(String price) {
+  public void setPrice(int price) {
     this.price = price;
   }
 
-  public String getFlightInformation() {
-    String information;
-    information = "This flight is from " + departure + " to " + arrival + ".";
-    return information;
-  }
 }
 
 class MobilePhone {
