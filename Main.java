@@ -11,6 +11,7 @@ class Main {
     // database.displayFlights(toCity);
     database.displayFlightsFromCity("Warsaw");
     database.displayFlightsToCity("Tokyo");
+    System.out.println(database.getCities());
   }
 }
 
@@ -89,6 +90,20 @@ class FlightDatabase {
       System.out.println("Flight form " + element.getDeparture() + " to " +
           element.getArrival());
     }
+  }
+
+  public ArrayList<String> getCities() {
+    ArrayList<String> cities = new ArrayList<String>();
+    for (int i = 0; i < this.flights.size(); i++) {
+      Flight flight = this.flights.get(i);
+      if (!cities.contains(flight.getDeparture())) {
+        cities.add(flight.getDeparture());
+      }
+      if (!cities.contains(flight.getArrival())) {
+        cities.add(flight.getArrival());
+      }
+    }
+    return cities;
   }
 }
 
