@@ -1,11 +1,11 @@
 package src;
+
 import java.util.ArrayList;
 
 class Main {
   public static void main(String[] args) {
-    FlightDatabase database = new FlightDatabase();
-    database.checkIfFlightExists("Berlin", "Tokyo");
-
+    FlightDatabaseDAO databaseDAO = new FlightDatabaseDAO();
+    // database.checkIfFlightExists("Berlin", "Tokyo");
     // ArrayList<Flight> fromCity = database.getFlightsFromCity("Berlin");
     // ArrayList<Flight> toCity = database.getFlightsToCity("Berlin");
     // database.displayFlights(fromCity);
@@ -15,11 +15,11 @@ class Main {
     // System.out.println(database.getCities());
     // System.out.println("Cheapest flight : " +
     // database.getCheapestsFlightFromCity("Warsaw").getFlightInformation());
-    ArrayList<Journey> journeys = database.getFlights("Paris", "Porto");
-    System.out.println(journeys);
+    // ArrayList<Journey> journeys = databaseDAO.getJourneysFromTo("Paris",
+    // "Porto");
+    // System.out.println(journeys);
+    // System.out.println(databaseDAO.getFlightsFromTo("Paris", "Porto"));
+    databaseDAO.displayFlightAndJourneysFromTo("Paris", "Porto");
+
   }
 }
-
-
-
-
