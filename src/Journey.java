@@ -1,4 +1,5 @@
-package src;
+package KodilaFlightSearchEngine.src;
+
 class Journey {
     Flight first;
     Flight second;

@@ -1,6 +1,4 @@
-package src;
-
-import java.util.ArrayList;
+package KodilaFlightSearchEngine.src;
 
 class Main {
   public static void main(String[] args) {

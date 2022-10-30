@@ -1,4 +1,5 @@
-package src;
+package KodilaFlightSearchEngine.src;
+
 class MobilePhone {
     private String weight;
     private int price;

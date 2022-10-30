@@ -1,4 +1,5 @@
-package src;
+package KodilaFlightSearchEngine.src;
+
 class Flight {
     private String departure;
     private String arrival;
