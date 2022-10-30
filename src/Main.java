@@ -16,7 +16,7 @@ class Main {
     // ArrayList<Journey> journeys = databaseDAO.getJourneysFromTo("Paris",
     // "Porto");
     // System.out.println(journeys);
-    // System.out.println(databaseDAO.getFlightsFromTo("Paris", "Porto"));
+    // System.out.println(databaseDAO.getFlightsFromTo("Paris", "Porto"));123
     databaseDAO.displayFlightAndJourneysFromTo("Paris", "Porto");
 
   }
